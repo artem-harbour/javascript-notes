@@ -181,3 +181,30 @@ function getUser() {
   };
 }
 ```
+
+### Use optional chaining to avoid "non-existing property" problem
+
+**Bad:**
+
+```javascript
+const user = {};
+
+if ( user.address.street ) { // TypeError: Cannot read properties of undefined
+  console.log(true);
+}
+
+// To avoid the error
+if ( user.address && user.address.street ) {
+  console.log(true);
+}
+```
+
+**Good:**
+
+```javascript
+const user = {};
+
+if ( user.address?.street ) { // no error
+  console.log(true);
+}
+```
