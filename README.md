@@ -218,3 +218,79 @@ if ( admin.address?.street?.name ) { // no error
 ```
 
 More info: [Optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+
+### Use destructuring assignment for arrays and objects
+
+**Bad:**
+
+```javascript
+const arr = ['Joe', 'Doe'];
+let name = arr[0];
+let surname = arr[1];
+
+const options = {
+  width: 100,
+  height: 100,
+};
+let width = options.width;
+let height = options.height;
+
+// many parameters, difficult to remember the order
+function doSomething(title, width, height, items) {}
+```
+
+**Good:**
+
+```javascript
+const arr = ['Joe', 'Doe'];
+let [ name, surname ] = arr;
+
+const options = {
+  width: 100,
+  height: 100,
+};
+let { width, height } = options;
+
+const funcOptions = {
+  width: 200,
+  height: 200,
+  items,
+};
+
+function doSomething({ items, width, height, title = 'Default' }) {}
+doSomething(funcOptions);
+```
+
+More info: [Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+
+### Use spread syntax and rest parameters
+
+**Bad:**
+
+```javascript
+// array copy
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const newArr = arr1.concat(arr2); // [1, 2, 3, 4, 5, 6]
+
+// shallow object copy
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+const newObj = Object.assign({}, obj1, obj2); // {a: 1, b: 2, c: 3, d: 4}
+```
+
+**Good:**
+
+```javascript
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const newArr = [...arr1, ...arr2, 7, 8]; // [1, 2, 3, 4, 5, 6, 7, 8]
+
+// shallow object copy
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+const newObj = { ...obj1, ...obj2 }; // {a: 1, b: 2, c: 3, d: 4}
+```
+
+More info: [Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+More info: [Rest parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
