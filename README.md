@@ -184,12 +184,15 @@ function getUser() {
 
 ### Use optional chaining to avoid "non-existing property" problem
 
+Use optional chaining only for optional properties that may not be present in the object, so as not to hide programming errors.
+
 **Bad:**
 
 ```javascript
 const user = {};
 
-if ( user.address.street ) { // TypeError: Cannot read properties of undefined
+// TypeError: Cannot read properties of undefined
+if ( user.address.street ) {
   console.log(true);
 }
 
@@ -203,8 +206,15 @@ if ( user.address && user.address.street ) {
 
 ```javascript
 const user = {};
+const admin = { address: {} };
 
 if ( user.address?.street ) { // no error
   console.log(true);
 }
+
+if ( admin.address?.street?.name ) { // no error
+  console.log(true);
+}
 ```
+
+More info: [Optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
